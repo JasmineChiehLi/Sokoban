@@ -1,10 +1,11 @@
 #pragma once
 #include <QFile>
 #include <QTextStream>
-#include <QFileDevice>
 
 #include <QString>
 #include <String>
+
+#define ALL 4
 
 class Userfile
   :public QObject
@@ -17,14 +18,16 @@ public:
   std::string inputName();
   std::string inputPass();
   void outputInfo();
-//  void saveScore(int score);
-//  void getLevel();
+  int getScore(int level);
+  void saveScore(int level, int score);
+  int getLevel();
 
 private:
   QFile *userData = nullptr;
   QString *name = nullptr;
   QString *password = nullptr;
   QString *filename = nullptr;
+  int score[ALL];
   QTextStream *input;
   QTextStream *output;
 };

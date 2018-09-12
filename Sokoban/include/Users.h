@@ -47,12 +47,11 @@ private:
   QString name;
   QString password;
   QFile *list = nullptr;
+  Userfile *userfile = nullptr;
   QLineEdit *userName = nullptr;
   QLineEdit *userPasswd = nullptr;
   QTextStream *listEdit = nullptr;
   QTextStream *output = nullptr;
   QTextStream *input = nullptr;
   QPalette *headPic = nullptr;
-
-  Userfile *userfile = nullptr;
 };
