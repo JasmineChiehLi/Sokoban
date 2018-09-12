@@ -16,6 +16,8 @@
 
 #define height 675
 #define width 975
+#define SignUp true
+#define LogIn false
 
 class Users
   :public QWidget
@@ -23,23 +25,25 @@ class Users
   Q_OBJECT
 public:
   Users();
-  //Users(bool isNew = true);
+  Users(bool isNew);
   bool getHasExisted();
-  void signup();
-  void login();
+  void generalUI();
+  bool canPass();
+  void closeUI();
 
   public slots:
-  void initUser();
+  void signup();
+  void login();
 
 private:
   bool isNew_;
   QString name;
   QString password;
-  QFile *userfile;
-  QFile *list;
-  QLineEdit *userName;
-  QLineEdit *userPasswd;
-  QTextStream *listEdit;
-  QTextStream *output;
-  QTextStream *input;
+  QFile *userfile = nullptr;
+  QFile *list = nullptr;
+  QLineEdit *userName = nullptr;
+  QLineEdit *userPasswd = nullptr;
+  QTextStream *listEdit = nullptr;
+  QTextStream *output = nullptr;
+  QTextStream *input = nullptr;
 };
