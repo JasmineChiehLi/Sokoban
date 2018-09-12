@@ -15,6 +15,9 @@ Users::Users(bool isNew) {
   generalUI();
 }
 
+Users::~Users() {
+}
+
 bool Users::getHasExisted() {
   QString temp;
   list->open(QIODevice::ReadOnly | QIODevice::Text);
@@ -35,6 +38,7 @@ bool Users::getHasExisted() {
 void Users::generalUI() {
   QLabel* user = new QLabel(QString("Username"));
   QLabel* userPass = new QLabel(QString("Password"));
+  QLabel* header;
   userName = new QLineEdit;
   userPasswd = new QLineEdit;
 
@@ -46,18 +50,46 @@ void Users::generalUI() {
   QVBoxLayout *userL = new QVBoxLayout;
 
   QPushButton *okay = new QPushButton("Done");
-  okay->setGeometry(0, 0, 100, 50);
+  okay->setFixedHeight(30);
+  okay->setFixedWidth(300);
 
+
+ /* header->setAutoFillBackground(true);
+  header->setFixedWidth(300);*/
+
+  headPic = new QPalette;
+ 
   if (isNew_) {
+    setWindowTitle("Sign Up");
+    header = new QLabel("SIGN UP");
+    //headPic->setBrush(QPalette::Background, QBrush(QPixmap("D:\\SignUp.png")));
     QObject::connect(okay, SIGNAL(clicked()), this, SLOT(signup()));
   }
   else {
+    setWindowTitle("Log In");
+    header = new QLabel("LOG IN");
+    //headPic->setBrush(QPalette::Background, QBrush(QPixmap("D:\\SignUp.png")));
     QObject::connect(okay, SIGNAL(clicked()), this, SLOT(login()));
   }
+
+
+  QFont head;
+  head.setPointSize(55);
+  head.setFamily("Impact");
+
+  header->setFixedWidth(300);
+  header->setFont(head);
+  header->setAlignment(Qt::AlignCenter);
+
+ // header->setPalette(*headPic);
 
   //设置文本框样式
   userName->setEchoMode(QLineEdit::Normal);
   userPasswd->setEchoMode(QLineEdit::Password);
+
+  userName->setFixedWidth(200);
+  userPasswd->setFixedWidth(200);
+
 
   //设置输入限制
   userName->setPlaceholderText("Your name here");
@@ -67,15 +99,26 @@ void Users::generalUI() {
   //设置界面布局
   userN->addWidget(user);
   userN->addWidget(userName);
+  userN->setMargin(0);
+  userLine->setFixedHeight(50);
+  userLine->setFixedWidth(300);
   userLine->setLayout(userN);
 
   userP->addWidget(userPass);
   userP->addWidget(userPasswd);
+  userP->setMargin(0);
+  userP->setAlignment(Qt::AlignTop);
+  passLine->setFixedHeight(50);
+  passLine->setFixedWidth(300);
   passLine->setLayout(userP);
 
+  userL->addWidget(header);
   userL->addWidget(userLine);
   userL->addWidget(passLine);
   userL->addWidget(okay);
+  userL->setMargin(0);
+
+  userL->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
 
   setLayout(userL);
 }
@@ -86,6 +129,8 @@ void Users::signup() {
   name = userName->text();
   password = userPasswd->text();
 
+  userfile = new Userfile(name, password);
+
   if (getHasExisted()) {
     QMessageBox *over = new QMessageBox(QMessageBox::Warning, QString("Oops.."),
       QString("This user name has been taken."), QMessageBox::Ok);
@@ -94,33 +139,23 @@ void Users::signup() {
     return;
   }
 
-  QString filename(QString("Data\\") + name + QString(".dat"));
-
   list->open(QIODevice::Append);
 
-  userfile = new QFile;
-  userfile->setFileName(filename);
-  userfile->open(QIODevice::WriteOnly);
-
   listEdit = new QTextStream(list);
-  output = new QTextStream(userfile);
-  input = new QTextStream(userfile);
-
-
   *listEdit << name << endl;
-  *output << name << endl;
-  *output << password << endl;
 
-  userfile->close();
+  userfile->outputInfo();
+
   list->close();
 
   closeUI();
-
 }
 
 void Users::login() {
   name = userName->text();
   password = userPasswd->text();
+
+  userfile = new Userfile(name, password);
 
   if (!getHasExisted()) {
     QMessageBox *over = new QMessageBox(QMessageBox::Warning, QString("Oops.."),
@@ -130,8 +165,6 @@ void Users::login() {
     return;
   }
 
-  /* listEdit = new QTextStream(list);
-  output = new QTextStream(userfile); */
 
   if (canPass()) {
     closeUI();
@@ -144,32 +177,19 @@ void Users::login() {
 
     return;
   }
-  // userfile->close();
+
 }
 
 bool Users::canPass() {
   QString filename(QString("Data\\") + name + QString(".dat"));
+  
+  std::string nameArr = name.toLatin1();
+  std::string passArr = password.toLatin1();
 
-  userfile = new QFile;
-  userfile->setFileName(filename);
-  userfile->open(QIODevice::ReadOnly | QIODevice::Text);
-
-  input = new QTextStream(userfile);
-
-  QString tempName, tempPass;
-
-  tempName = input->readLine();
-  tempPass = input->readLine();
-
-  std::string nameArr(tempName.toLatin1());
-  std::string passArr(tempPass.toLatin1());
-  std::string inName(name.toLatin1());
-  std::string inPass(password.toLatin1());
-
-  userfile->close();
+  std::string inName = userfile->inputName();
+  std::string inPass = userfile->inputPass();
 
   return((nameArr == inName) && (passArr == inPass));
-
 }
 
 void Users::closeUI() {
@@ -179,8 +199,6 @@ void Users::closeUI() {
   delete userPasswd;
   delete list;
   delete listEdit;
-  delete output;
-  delete input;
 
   this->close();
 }

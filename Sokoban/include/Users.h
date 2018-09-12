@@ -8,14 +8,20 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QPixmap>
+#include <QPalette>
+#include <QBrush>
 
 #include <QFile>
+#include <QTextStream>
 
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
-#include <QDebug>
+#include "Userfile.h"
 
-#define height 675
-#define width 975
+#define height 400
+#define width 600
 #define SignUp true
 #define LogIn false
 
@@ -25,6 +31,7 @@ class Users
   Q_OBJECT
 public:
   Users();
+  ~Users();
   Users(bool isNew);
   bool getHasExisted();
   void generalUI();
@@ -39,11 +46,13 @@ private:
   bool isNew_;
   QString name;
   QString password;
-  QFile *userfile = nullptr;
   QFile *list = nullptr;
   QLineEdit *userName = nullptr;
   QLineEdit *userPasswd = nullptr;
   QTextStream *listEdit = nullptr;
   QTextStream *output = nullptr;
   QTextStream *input = nullptr;
+  QPalette *headPic = nullptr;
+
+  Userfile *userfile = nullptr;
 };
