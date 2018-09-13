@@ -9,7 +9,7 @@ Users::Users() {
 
 Users::Users(bool isNew) {
   resize(width, height);
-  isNew_ = isNew;
+  status_ = isNew;
   list = new QFile("Data\\list.dat");
   listEdit = new QTextStream(list);
   generalUI();
@@ -35,6 +35,7 @@ bool Users::getHasExisted() {
   return false;
 }
 
+
 void Users::generalUI() {
   QLabel* user = new QLabel(QString("Username"));
   QLabel* userPass = new QLabel(QString("Password"));
@@ -44,22 +45,35 @@ void Users::generalUI() {
 
   QWidget* userLine = new QWidget;
   QWidget* passLine = new QWidget;
+  QWidget* buttLine = new QWidget;
 
   QHBoxLayout *userN = new QHBoxLayout;
   QHBoxLayout *userP = new QHBoxLayout;
+  QHBoxLayout *button = new QHBoxLayout;
   QVBoxLayout *userL = new QVBoxLayout;
 
-  QPushButton *okay = new QPushButton("Done");
-  okay->setFixedHeight(30);
-  okay->setFixedWidth(300);
 
+  QPushButton *okay = new QPushButton("Done");
+  QPushButton *back = new QPushButton("Back");
+
+  QObject::connect(back, SIGNAL(clicked()),this, SLOT(backStart()));
+
+  okay->setFixedHeight(30);
+  okay->setFixedWidth(135);
+  back->setFixedHeight(30);
+  back->setFixedWidth(135);
+
+  button->addWidget(okay);
+  button->addWidget(back);
+  button->setAlignment(Qt::AlignCenter);
+  buttLine->setLayout(button);
 
  /* header->setAutoFillBackground(true);
   header->setFixedWidth(300);*/
 
   headPic = new QPalette;
  
-  if (isNew_) {
+  if (status_) {
     setWindowTitle("Sign Up");
     header = new QLabel("SIGN UP");
     //headPic->setBrush(QPalette::Background, QBrush(QPixmap("D:\\SignUp.png")));
@@ -115,7 +129,7 @@ void Users::generalUI() {
   userL->addWidget(header);
   userL->addWidget(userLine);
   userL->addWidget(passLine);
-  userL->addWidget(okay);
+  userL->addWidget(buttLine);
   userL->setMargin(0);
 
   userL->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
@@ -123,6 +137,10 @@ void Users::generalUI() {
   setLayout(userL);
 }
 
+void Users::backStart() {
+  emit sendsignal();
+  this->close();
+}
 
 void Users::signup() {
 

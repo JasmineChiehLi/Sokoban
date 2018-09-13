@@ -41,9 +41,13 @@ public:
   public slots:
   void signup();
   void login();
+  void backStart();
+
+signals:
+  void sendsignal();
 
 private:
-  bool isNew_;
+  bool status_;
   QString name;
   QString password;
   QFile *list = nullptr;
