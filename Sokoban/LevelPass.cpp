@@ -26,6 +26,7 @@ void LevelPass::generalUI() {
   addWidget(exit);
 
   QObject::connect(choose, SIGNAL(clicked()), this, SLOT(levelUI()));
+  QObject::connect(exit, SIGNAL(clicked()), this, SLOT(exitAct()));
 
   choose->setFont(*font);
   exit->setFont(*font);
@@ -37,4 +38,8 @@ void LevelPass::generalUI() {
 
 void LevelPass::levelUI() {
   emit levelPage();
+}
+
+void LevelPass::exitAct() {
+  emit exitSignal();
 }
