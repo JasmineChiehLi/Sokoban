@@ -2,9 +2,13 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QDebug>
 
 #include "Users.h"
 #include "Game.h"
+
+#define buttonH1 40
+#define buttonW1 200
 
 class Start
   :public QWidget
@@ -20,7 +24,6 @@ public:
   void play();
 
 private:
-  Users *logUser = nullptr;
+  Users * logUser = nullptr;
   Users *signUser = nullptr;
-  Game* game = nullptr;
 };

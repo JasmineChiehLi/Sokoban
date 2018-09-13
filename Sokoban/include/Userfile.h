@@ -23,7 +23,7 @@ public:
   int getLevel();
 
 private:
-  QFile *userData = nullptr;
+  QFile * userData = nullptr;
   QString *name = nullptr;
   QString *password = nullptr;
   QString *filename = nullptr;

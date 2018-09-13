@@ -49,10 +49,10 @@ std::string Userfile::inputPass() {
 
 //向注册用户文件输出用户名与密码
 void Userfile::outputInfo() {
-  userData->open(QIODevice::WriteOnly);
+  userData->open(QIODevice::WriteOnly|QIODevice::Text);
 
-  *output << name << endl;
-  *output << password << endl;
+  *output << *name << endl;
+  *output << *password << endl;
   userData->close();
 
 }
@@ -61,7 +61,7 @@ int Userfile::getScore(int level) {
   QString temp;
 
   userData->open(QIODevice::ReadWrite);
-  
+
   int i = 0;
   input->readLine();
   input->readLine();
@@ -85,7 +85,7 @@ void Userfile::saveScore(int level, int newScore) {
 
     *output << *name << endl;
     *output << *password << endl;
-    
+
     int i = 0;
     while (score[i] > 0) {
       *output << QString(score[i]) << endl;

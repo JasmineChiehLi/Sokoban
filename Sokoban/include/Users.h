@@ -45,6 +45,8 @@ public:
 
 signals:
   void sendsignal();
+signals:
+  void closeSignal();
 
 private:
   bool status_;

@@ -1,6 +1,6 @@
 #include <QApplication>
+#include "Game.h"
 #include "Start.h"
-
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +8,10 @@ int main(int argc, char *argv[])
 
   Start* start = new Start;
   start->show();
+
+  /*Game* game = new Game;
+  game->show();*/
+
 
   return a.exec();
 }

@@ -46,33 +46,43 @@ void Users::generalUI() {
   QWidget* userLine = new QWidget;
   QWidget* passLine = new QWidget;
   QWidget* buttLine = new QWidget;
+  QWidget* exitLine = new QWidget;
 
   QHBoxLayout *userN = new QHBoxLayout;
   QHBoxLayout *userP = new QHBoxLayout;
   QHBoxLayout *button = new QHBoxLayout;
+  QHBoxLayout *exitL = new QHBoxLayout;
   QVBoxLayout *userL = new QVBoxLayout;
-
 
   QPushButton *okay = new QPushButton("Done");
   QPushButton *back = new QPushButton("Back");
+  QPushButton *exit = new QPushButton("Exit");
 
-  QObject::connect(back, SIGNAL(clicked()),this, SLOT(backStart()));
+  QObject::connect(back, SIGNAL(clicked()), this, SLOT(backStart()));
 
   okay->setFixedHeight(30);
   okay->setFixedWidth(135);
   back->setFixedHeight(30);
   back->setFixedWidth(135);
+  exit->setFixedHeight(30);
+  exit->setFixedWidth(280);
 
   button->addWidget(okay);
   button->addWidget(back);
-  button->setAlignment(Qt::AlignCenter);
+  button->setAlignment(Qt::AlignCenter | Qt::AlignTop);
+  button->setMargin(0);
   buttLine->setLayout(button);
 
- /* header->setAutoFillBackground(true);
+  exitL->addWidget(exit);
+  exitL->setMargin(0);
+  exitL->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
+  exitLine->setLayout(exitL);
+
+  /* header->setAutoFillBackground(true);
   header->setFixedWidth(300);*/
 
   headPic = new QPalette;
- 
+
   if (status_) {
     setWindowTitle("Sign Up");
     header = new QLabel("SIGN UP");
@@ -95,7 +105,7 @@ void Users::generalUI() {
   header->setFont(head);
   header->setAlignment(Qt::AlignCenter);
 
- // header->setPalette(*headPic);
+  // header->setPalette(*headPic);
 
   //设置文本框样式
   userName->setEchoMode(QLineEdit::Normal);
@@ -130,6 +140,7 @@ void Users::generalUI() {
   userL->addWidget(userLine);
   userL->addWidget(passLine);
   userL->addWidget(buttLine);
+  userL->addWidget(exitLine);
   userL->setMargin(0);
 
   userL->setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
@@ -200,7 +211,7 @@ void Users::login() {
 
 bool Users::canPass() {
   QString filename(QString("Data\\") + name + QString(".dat"));
-  
+
   std::string nameArr = name.toLatin1();
   std::string passArr = password.toLatin1();
 
@@ -218,5 +229,6 @@ void Users::closeUI() {
   delete list;
   delete listEdit;
 
+  emit closeSignal();
   this->close();
 }
