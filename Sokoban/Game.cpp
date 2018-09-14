@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Map1.h"
 
 Game::Game() {
   LevelPass* passScene = new LevelPass;
@@ -20,7 +21,19 @@ void Game::format(QGraphicsScene* newScene) {
 
 void Game::levelChange() {
   LevelChoose* levelPage = new LevelChoose;
+
+  QObject::connect(levelPage, SIGNAL(level1()), this, SLOT(createmap1()));
+
   format(levelPage);
   setWindowTitle("Levels");
   setScene(levelPage);
+}
+
+void Game::createmap1()
+{
+  scene1 = new QGraphicsScene();
+  Map1 *map1 = new Map1(scene1);
+  setScene(scene1);
+
+  show();
 }

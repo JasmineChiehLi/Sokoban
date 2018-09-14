@@ -1,5 +1,6 @@
 #pragma once
 #include <QGraphicsView>
+#include <QGraphicsScene>
 #include "LevelPass.h"
 #include "LevelChoose.h"
 
@@ -14,29 +15,16 @@ public:
 
   public slots:
   void levelChange();
+  void createmap1();
 
 private:
+  QGraphicsScene* scene1 = nullptr;
+  /*
+  QGraphicsScene* scene2 = nullptr;
+  QGraphicsScene* scene3 = nullptr;
+  QGraphicsScene* scene4 = nullptr;
+  */
 
 };
 
-
-/*#pragma once
-#include <QGraphicsView>
-#include <QGraphicsScene>*/
-
-/*class Game
-  :public QGraphicsView
-{
-  Q_OBJECT
-public:
-  Game();
-  ~Game();
-
-
-  public slots:
-
-
-private:
-
-};*/
 

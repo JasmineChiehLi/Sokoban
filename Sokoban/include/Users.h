@@ -8,9 +8,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QPixmap>
 #include <QPalette>
-#include <QBrush>
 
 #include <QFile>
 #include <QTextStream>
@@ -20,8 +18,8 @@
 
 #include "Userfile.h"
 
-#define height 400
-#define width 600
+#define height 675
+#define width 975
 #define SignUp true
 #define LogIn false
 

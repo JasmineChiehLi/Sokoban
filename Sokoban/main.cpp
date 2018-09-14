@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QDebug>
 #include "Game.h"
 #include "Start.h"
 

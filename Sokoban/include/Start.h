@@ -1,13 +1,13 @@
 #pragma once
-#include <QWidget>
 #include <QPushButton>
 #include <QHBoxLayout>
-#include <QDebug>
+#include <QPalette>
+#include <QFont>
 
 #include "Users.h"
 #include "Game.h"
 
-#define buttonH1 40
+#define buttonH1 70
 #define buttonW1 200
 
 class Start

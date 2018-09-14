@@ -20,9 +20,13 @@ public:
 
   public slots:
   void levelUI();
+  void exitAct();
 
 signals:
   void levelPage();
+
+signals:
+  void exitSignal();
 
 private:
 };

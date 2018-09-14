@@ -1,25 +1,14 @@
 #include "Start.h"
 
 Start::Start() {
-  QPushButton *log = new QPushButton("Log in");
-  QPushButton *sign = new QPushButton("Sign up");
-  QPushButton *exit = new QPushButton("Exit");
+  QPushButton *log = new QPushButton;
+  QPushButton *sign = new QPushButton;
+  QPushButton *exit = new QPushButton;
 
   QVBoxLayout *options = new QVBoxLayout;
   options->addWidget(log);
-  options->addWidget(sign);
   options->addWidget(exit);
-
-
-  /*log->setIcon(QIcon("Resources\\ButtonNormal.png"));
-  log->setIconSize(QSize(buttonH1,buttonW1));*/
-
-
- /* setButtonStyle(log);
-  setButtonStyle(sign);
-  setButtonStyle(exit);*/
-
-  setWindowTitle("Account");
+  options->addWidget(sign);
 
   QObject::connect(log, SIGNAL(clicked()), this, SLOT(logIn()));
   QObject::connect(sign, SIGNAL(clicked()), this, SLOT(signUp()));
@@ -35,12 +24,24 @@ Start::Start() {
   exit->setFixedHeight(buttonH1);
   exit->setFixedWidth(buttonW1);
 
+  log->setStyleSheet("QPushButton{border-image:url(Resources/LogNormal.png);background:transparent;}"
+    "QPushButton:hover{border-image:url(Resources/LogHover.png);background:transparent;}"
+    "QPushButton:pressed{border-image:url(Resources/LogPressed.png);background:transparent;");
+
+  sign->setStyleSheet("QPushButton{border-image:url(Resources/SignNormal.png);background:transparent;}"
+    "QPushButton:hover{border-image:url(Resources/SignHover.png);background:transparent;}"
+    "QPushButton:pressed{border-image:url(Resources/SignPressed.png);background:transparent;");
+
+  exit->setStyleSheet("QPushButton{border-image:url(Resources/ExitNormal.png);background:transparent;}"
+    "QPushButton:hover{border-image:url(Resources/ExitHover.png);background:transparent;}"
+    "QPushButton:pressed{border-image:url(Resources/ExitPressed.png);background:transparent;");
+
   options->setAlignment(Qt::AlignHCenter);
   setLayout(options);
 
   setAutoFillBackground(true);
   QPalette* backGround = new QPalette;
-  backGround->setBrush(QPalette::Background, QBrush(QPixmap("Resources//StartWall.jpg")));
+  backGround->setBrush(QPalette::Background, QBrush(QPixmap("Resources\\StartWall.jpg")));
   setPalette(*backGround);
 }
 
@@ -68,10 +69,3 @@ void Start::play() {
   Game* game = new Game;
   game->show();
 }
-
-
-/*void Start::setButtonStyle(QPushButton* button) {
-  button->setStyleSheet("QPushButton{background-image:/Resources/ButtonNormal.png)}"
-    "QPushButton:hover{border-image: url(:/Resources/ButtonHover.png)}"
-    "QPushButton:pressed{border-image: url(:/Resources/ButtonPressed.png)}");
-}*/

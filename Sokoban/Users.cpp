@@ -59,6 +59,7 @@ void Users::generalUI() {
   QPushButton *exit = new QPushButton("Exit");
 
   QObject::connect(back, SIGNAL(clicked()), this, SLOT(backStart()));
+  QObject::connect(exit, SIGNAL(clicked()), this, SLOT(close()));
 
   okay->setFixedHeight(30);
   okay->setFixedWidth(135);
@@ -78,7 +79,7 @@ void Users::generalUI() {
   exitL->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
   exitLine->setLayout(exitL);
 
-  
+
 
   headPic = new QPalette;
 
@@ -86,7 +87,7 @@ void Users::generalUI() {
     setWindowTitle("Sign Up");
 
     QPalette* backGround = new QPalette;
-    backGround->setBrush(QPalette::Background,QBrush(QPixmap("Resources\\SignUpBG.jpg")));
+    backGround->setBrush(QPalette::Background, QBrush(QPixmap("Resources\\SignUpBG.jpg")));
     setPalette(*backGround);
 
     header = new QLabel("SIGN UP");
@@ -165,6 +166,22 @@ void Users::signup() {
 
   userfile = new Userfile(name, password);
 
+  if (name == QString("")) {
+    QMessageBox *over = new QMessageBox(QMessageBox::Warning, QString("Oops.."),
+      QString("The name cannot be empty."), QMessageBox::Ok);
+    over->exec();
+
+    return;
+  }
+
+  if (password == QString("")) {
+    QMessageBox *over = new QMessageBox(QMessageBox::Warning, QString("Oops.."),
+      QString("The password cannot be empty."), QMessageBox::Ok);
+    over->exec();
+
+    return;
+  }
+
   if (getHasExisted()) {
     QMessageBox *over = new QMessageBox(QMessageBox::Warning, QString("Oops.."),
       QString("This user name has been taken."), QMessageBox::Ok);
@@ -191,6 +208,14 @@ void Users::login() {
 
   userfile = new Userfile(name, password);
 
+  if (name == QString("")) {
+    QMessageBox *over = new QMessageBox(QMessageBox::Warning, QString("Oops.."),
+      QString("The name cannot be empty."), QMessageBox::Ok);
+    over->exec();
+
+    return;
+  }
+
   if (!getHasExisted()) {
     QMessageBox *over = new QMessageBox(QMessageBox::Warning, QString("Oops.."),
       QString("This user name hasn't been signed up."), QMessageBox::Ok);
@@ -198,7 +223,6 @@ void Users::login() {
 
     return;
   }
-
 
   if (canPass()) {
     closeUI();
