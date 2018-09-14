@@ -1,21 +1,16 @@
 #include "Map2.h"
 #define unit 75
 
-
 Map2::Map2()
 {
-	//create the scene
-	scene = new QGraphicsScene();
+
+}
+
+Map2::Map2(QGraphicsScene *scene)
+{
+	//initialize the scene
+	scene_ = scene;
 	scene->setSceneRect(0, 0, 975, 675);
-	setBackgroundBrush(QBrush(QImage("Resources/floor.jpg"))); //backgroud   //右侧300*600需要被覆盖
-
-															   //visualize the scene
-	setScene(scene);
-
-	//去掉滚动栏
-	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setFixedSize(975, 675);
 
 	//create the map
 
@@ -123,7 +118,7 @@ Map2::Map2()
 		scene->addItem(spot[i]);
 
 	}
-	show();
+
 }
 
 

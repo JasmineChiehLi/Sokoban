@@ -1,24 +1,17 @@
 #include "Map1.h"
 #include<qbrush.h>
-
 #define unit 75
-
 
 Map1::Map1()
 {
-	//create the scene
-	scene = new QGraphicsScene();
+
+}
+
+Map1::Map1(QGraphicsScene *scene)
+{
+	//initialize the scene
+	scene_ = scene;
 	scene->setSceneRect(0, 0, 975, 675);
-	setBackgroundBrush(QBrush(QImage("Resources/floor.jpg"))); //backgroud   //右侧300*600需要被覆盖
-
-															   //visualize the scene
-	setScene(scene);
-	
-	//去掉滚动栏
-	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setFixedSize(975, 675);
-
 
 	//create the map
 
@@ -128,7 +121,7 @@ Map1::Map1()
 	player->setFocus();
 
 
-	show();
+	
 
 }
 
