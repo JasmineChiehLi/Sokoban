@@ -6,13 +6,14 @@
 #include<qgraphicsscene.h>
 #include<qgraphicsview.h>
 #include<qgraphicsitem.h>
-class Map3:public QGraphicsView
+class Map3
 {
 public:
 	Map3();
 	~Map3();
+	Map3(QGraphicsScene *scene);
 private:
-	QGraphicsScene * scene;
+	QGraphicsScene * scene_;
 	Block * block[56];
 	Boxes*box[4];
 	Player *player;
