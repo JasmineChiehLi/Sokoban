@@ -7,8 +7,6 @@
 #include "Users.h"
 #include "Game.h"
 
-#define buttonH1 70
-#define buttonW1 200
 
 class Start
   :public QWidget

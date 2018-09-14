@@ -1,14 +1,50 @@
 #include "Start.h"
 
+
 Start::Start() {
   QPushButton *log = new QPushButton;
   QPushButton *sign = new QPushButton;
   QPushButton *exit = new QPushButton;
 
-  QVBoxLayout *options = new QVBoxLayout;
-  options->addWidget(log);
-  options->addWidget(exit);
-  options->addWidget(sign);
+  QWidget *options = new QWidget;
+  QWidget *logLine = new QWidget;
+  QWidget *exitLine = new QWidget;
+  QWidget *signLine = new QWidget;
+
+  QHBoxLayout *startLay = new QHBoxLayout;
+  QVBoxLayout *optLay = new QVBoxLayout;
+  QHBoxLayout *logLay = new QHBoxLayout;
+  QHBoxLayout *exitLay = new QHBoxLayout;
+  QHBoxLayout *signLay = new QHBoxLayout;
+
+  options->setFixedSize(QSize(buttonW1 * factorW, buttonH1 * 5.26));
+  logLine->setFixedSize(QSize(buttonW1 * factorW, buttonH1*factorH));
+  exitLine->setFixedSize(QSize(buttonW1 * factorW, buttonH1*factorH));
+  signLine->setFixedSize(QSize(buttonW1 * factorW, buttonH1*factorH));
+
+  options->setLayout(optLay);
+  logLine->setLayout(logLay);
+  exitLine->setLayout(exitLay);
+  signLine->setLayout(signLay);
+
+  logLine->setContentsMargins(0,0,startMargin,0);
+  exitLine->setContentsMargins(0, 0, startMargin, 0);
+  signLine->setContentsMargins(0, 0, startMargin, 0);
+
+  logLay->addWidget(log);
+  exitLay->addWidget(exit);
+  signLay->addWidget(sign);
+
+  optLay->setAlignment(Qt::AlignBottom);
+  logLay->setAlignment(Qt::AlignRight | Qt::AlignBottom);
+  exitLay->setAlignment(Qt::AlignCenter | Qt::AlignBottom);
+  signLay->setAlignment(Qt::AlignRight | Qt::AlignBottom);
+
+  optLay->addWidget(logLine);
+  optLay->addWidget(exitLine);
+  optLay->addWidget(signLine);
+
+  startLay->addWidget(options);
 
   QObject::connect(log, SIGNAL(clicked()), this, SLOT(logIn()));
   QObject::connect(sign, SIGNAL(clicked()), this, SLOT(signUp()));
@@ -36,8 +72,8 @@ Start::Start() {
     "QPushButton:hover{border-image:url(Resources/ExitHover.png);background:transparent;}"
     "QPushButton:pressed{border-image:url(Resources/ExitPressed.png);background:transparent;");
 
-  options->setAlignment(Qt::AlignHCenter);
-  setLayout(options);
+  setLayout(startLay);
+
 
   setAutoFillBackground(true);
   QPalette* backGround = new QPalette;
