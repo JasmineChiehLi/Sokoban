@@ -78,21 +78,28 @@ void Users::generalUI() {
   exitL->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
   exitLine->setLayout(exitL);
 
-  /* header->setAutoFillBackground(true);
-  header->setFixedWidth(300);*/
+  
 
   headPic = new QPalette;
 
   if (status_) {
     setWindowTitle("Sign Up");
+
+    QPalette* backGround = new QPalette;
+    backGround->setBrush(QPalette::Background,QBrush(QPixmap("Resources\\SignUpBG.jpg")));
+    setPalette(*backGround);
+
     header = new QLabel("SIGN UP");
-    //headPic->setBrush(QPalette::Background, QBrush(QPixmap("D:\\SignUp.png")));
     QObject::connect(okay, SIGNAL(clicked()), this, SLOT(signup()));
   }
   else {
     setWindowTitle("Log In");
-    header = new QLabel("LOG IN");
-    //headPic->setBrush(QPalette::Background, QBrush(QPixmap("D:\\SignUp.png")));
+
+    QPalette* backGround = new QPalette;
+    backGround->setBrush(QPalette::Background, QBrush(QPixmap("Resources\\LogInBG.jpg")));
+    setPalette(*backGround);
+
+    header = new QLabel("LOG  IN");
     QObject::connect(okay, SIGNAL(clicked()), this, SLOT(login()));
   }
 
@@ -104,8 +111,6 @@ void Users::generalUI() {
   header->setFixedWidth(300);
   header->setFont(head);
   header->setAlignment(Qt::AlignCenter);
-
-  // header->setPalette(*headPic);
 
   //设置文本框样式
   userName->setEchoMode(QLineEdit::Normal);

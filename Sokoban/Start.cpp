@@ -10,6 +10,15 @@ Start::Start() {
   options->addWidget(sign);
   options->addWidget(exit);
 
+
+  /*log->setIcon(QIcon("Resources\\ButtonNormal.png"));
+  log->setIconSize(QSize(buttonH1,buttonW1));*/
+
+
+ /* setButtonStyle(log);
+  setButtonStyle(sign);
+  setButtonStyle(exit);*/
+
   setWindowTitle("Account");
 
   QObject::connect(log, SIGNAL(clicked()), this, SLOT(logIn()));
@@ -29,6 +38,10 @@ Start::Start() {
   options->setAlignment(Qt::AlignHCenter);
   setLayout(options);
 
+  setAutoFillBackground(true);
+  QPalette* backGround = new QPalette;
+  backGround->setBrush(QPalette::Background, QBrush(QPixmap("Resources//StartWall.jpg")));
+  setPalette(*backGround);
 }
 
 Start::~Start() {
@@ -55,3 +68,10 @@ void Start::play() {
   Game* game = new Game;
   game->show();
 }
+
+
+/*void Start::setButtonStyle(QPushButton* button) {
+  button->setStyleSheet("QPushButton{background-image:/Resources/ButtonNormal.png)}"
+    "QPushButton:hover{border-image: url(:/Resources/ButtonHover.png)}"
+    "QPushButton:pressed{border-image: url(:/Resources/ButtonPressed.png)}");
+}*/

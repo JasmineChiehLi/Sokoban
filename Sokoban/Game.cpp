@@ -5,6 +5,7 @@ Game::Game() {
   format(passScene);
   setScene(passScene);
   QObject::connect(passScene, SIGNAL(levelPage()), this, SLOT(levelChange()));
+  QObject::connect(passScene, SIGNAL(exitSignal()), this, SLOT(close()));
 }
 
 
