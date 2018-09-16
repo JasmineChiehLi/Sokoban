@@ -8,8 +8,10 @@ Map1::Map1()
 Map1::Map1(QGraphicsScene *scene)
 {
   //initialize the scene
+
   scene_ = scene;
   scene->setSceneRect(0, 0, 975, 675);
+  scene->setBackgroundBrush(QImage("Resources/Floor.jpg"));
 
   //create the map
 

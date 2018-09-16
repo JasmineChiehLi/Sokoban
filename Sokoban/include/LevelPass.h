@@ -1,10 +1,6 @@
 #pragma once
 #include <QGraphicsScene>
-//#include <QGraphicsWidget>
 #include <QPushButton>
-/*#include <QGraphicsLayout>
-#include <QGraphicsProxyWidget>
-#include <QGraphicsGridLayout>*/
 #include <QFont>
 
 #include "Parameter.h"
@@ -21,12 +17,12 @@ public:
   public slots:
   void levelUI();
   void exitAct();
+  void goNext();
 
 signals:
   void levelPage();
-
-signals:
   void exitSignal();
+  void nextSignal();
 
 private:
 };

@@ -1,22 +1,33 @@
 #pragma once
 #include <QGraphicsScene>
 #include <QPushButton>
-#include "Parameter.h"
 
-class LevelChoose
-  :public QGraphicsScene
+class LevelChoose :public QGraphicsScene
 {
+  Q_OBJECT
 public:
   LevelChoose();
   ~LevelChoose();
 
   public slots:
-  void goLevel1();
+
+  void levelChoose();
+  //void deleteButton();
+  void createmap1();
+  void createmap2();
+  void createmap3();
+  void createmap4();
 
 signals:
   void level1();
+  void level2();
+  void level3();
+  void level4();
 
 private:
-  QPushButton *L1 = nullptr;
+  QPushButton* button1;
+  QPushButton* button2;
+  QPushButton* button3;
+  QPushButton* button4;
 };
 
