@@ -1,21 +1,32 @@
 #pragma once
-
+#include<QGraphicsScene>
+#include<QObject>
 #include<QGraphicsRectItem>
-#include <QObject>
-#include <QKeyEvent>
-#include <QList>
-
-#include <QGraphicsScene>
-#include <QBrush>
-#include "qsound.h"
-
-#include "Boxes.h"
-#include "Parameter.h"
-
-class Player :public QObject, public QGraphicsRectItem {
-  Q_OBJECT
+#include<QKeyEvent>
+#include<QBrush>
+#include<QPen>
+#include<QList>
+//#include<Boxes.h>
+#include<QMainWindow>
+//
+#include"block.h"
+#include"boxes.h"
+#include"spot.h"
+#include"parameter.h"
+class Player:public QObject,public QGraphicsRectItem
+{
 public:
-  Player(QGraphicsItem * parent = 0);
-  void keyPressEvent(QKeyEvent * event);
-  ~Player();
+	Player();
+	void keyPressEvent(QKeyEvent * event);
+	void arrival(Boxes * box);
+	void up();
+	void down();
+	void left();
+	void right();
+	/*void left_pull();
+	void right_pull();
+	void up_pull();
+	void down_pull();*/
+	~Player();
 };
+

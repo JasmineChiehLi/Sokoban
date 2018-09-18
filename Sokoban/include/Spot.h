@@ -1,14 +1,13 @@
 #pragma once
-#include <QBrush>
-#include <QGraphicsRectItem>
-#include "Parameter.h"
-
-class Spot
-  :public QObject, public QGraphicsRectItem
+#include<QObject>
+#include<QGraphicsRectItem>
+#include<QBrush>
+#include<QPen>
+#include"parameter.h"
+class Spot :public QObject,public QGraphicsRectItem
 {
-  Q_OBJECT
 public:
-  Spot();
-  ~Spot();
+	Spot();
+	~Spot();
 };
-
+//

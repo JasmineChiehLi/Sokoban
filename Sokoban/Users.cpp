@@ -1,14 +1,14 @@
 #include "Users.h"
 
 Users::Users() {
-  resize(width, height);
+  resize(WIN_WIDHT, WIN_HEIGHT);
   list = new QFile("Data\\list.dat");
   listEdit = new QTextStream(list);
   generalUI();
-}
+}//
 
 Users::Users(bool isNew) {
-  resize(width, height);
+  resize(WIN_WIDHT, WIN_HEIGHT);
   status_ = isNew;
   list = new QFile("Data\\list.dat");
   listEdit = new QTextStream(list);

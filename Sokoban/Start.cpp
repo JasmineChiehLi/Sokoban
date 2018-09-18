@@ -1,6 +1,6 @@
 #include "Start.h"
-
-
+#include"Top.h"
+extern Top*top;
 Start::Start() {
   QPushButton *log = new QPushButton;
   QPushButton *sign = new QPushButton;
@@ -10,7 +10,7 @@ Start::Start() {
   QWidget *logLine = new QWidget;
   QWidget *exitLine = new QWidget;
   QWidget *signLine = new QWidget;
-
+  //
   QHBoxLayout *startLay = new QHBoxLayout;
   QVBoxLayout *optLay = new QVBoxLayout;
   QHBoxLayout *logLay = new QHBoxLayout;
@@ -50,8 +50,8 @@ Start::Start() {
   QObject::connect(sign, SIGNAL(clicked()), this, SLOT(signUp()));
   QObject::connect(exit, SIGNAL(clicked()), this, SLOT(close()));
 
-  setFixedHeight(height);
-  setFixedWidth(width);
+  setFixedHeight(WIN_HEIGHT);
+  setFixedWidth(WIN_WIDHT);
 
   log->setFixedHeight(buttonH1);
   log->setFixedWidth(buttonW1);
@@ -102,6 +102,7 @@ void Start::signUp() {
 }
 
 void Start::play() {
-  Game* game = new Game;
-  game->show();
+ // Game* game = new Game;
+ // game->show();
+	top = new Top();
 }

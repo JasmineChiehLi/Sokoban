@@ -1,15 +1,15 @@
 #include "Block.h"
 
+//
 
-Block::Block(QGraphicsItem *parent)
-  :QObject(), QGraphicsRectItem(parent)
+Block::Block()
 {
-  setRect(0, 0, UNIT, UNIT);
-  QBrush brush_Block(QImage("Resources/Block.png"));
-  setBrush(brush_Block);
+	setRect(0, 0, blockSize, blockSize);
+	QBrush brush_block(QImage("Resources/Block.png"));
+	setBrush(brush_block);
 }
-
 
 Block::~Block()
 {
+
 }

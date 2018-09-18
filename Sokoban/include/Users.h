@@ -9,7 +9,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPalette>
-
+//
 #include <QFile>
 #include <QTextStream>
 
@@ -18,8 +18,8 @@
 
 #include "Userfile.h"
 
-#define height 675
-#define width 975
+#define WIN_HEIGHT 675
+#define WIN_WIDHT 975
 #define SignUp true
 #define LogIn false
 

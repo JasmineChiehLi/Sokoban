@@ -6,28 +6,30 @@
 #include <String>
 
 #define ALL 4
-
+//
 class Userfile
-  :public QObject
+	:public QObject
 {
-  Q_OBJECT
+	Q_OBJECT
 public:
-  Userfile();
-  Userfile(QString userName, QString userPass);
-  ~Userfile();
-  std::string inputName();
-  std::string inputPass();
-  void outputInfo();
-  int getScore(int level);
-  void saveScore(int level, int score);
-  int getLevel();
+	Userfile();
+	Userfile(QString userName, QString userPass);
+	~Userfile();
+	std::string inputName();
+	std::string inputPass();
+	void outputInfo();
+	int getScore(int level);
+	void saveScore(int level, int score);
+	int getLevel();
 
 private:
-  QFile * userData = nullptr;
-  QString *name = nullptr;
-  QString *password = nullptr;
-  QString *filename = nullptr;
-  int score[ALL];
-  QTextStream *input;
-  QTextStream *output;
+	QFile *userData = nullptr;
+	QString *name = nullptr;
+	QString *password = nullptr;
+	QString *filename = nullptr;
+	int score[ALL];
+	int levelList[ALL];
+	QTextStream *input;
+	QTextStream *output;
 };
+

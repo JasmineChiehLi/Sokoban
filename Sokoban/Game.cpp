@@ -1,105 +1,130 @@
 #include "Game.h"
-#include "Map1.h"
-#include "Map2.h"
-#include "Map3.h"
-#include "Map4.h"
-
-#include <QTimer>
-
-Game::Game() {
-  LevelPass* passScene = new LevelPass;
-  format(passScene);
-  setScene(passScene);
-  QObject::connect(passScene, SIGNAL(levelPage()), this, SLOT(levelChange()));
-  QObject::connect(passScene, SIGNAL(exitSignal()), this, SLOT(close()));
-  QObject::connect(passScene, SIGNAL(nextSignal()), this, SLOT(next()));
-}
 
 
-Game::~Game() {
-
-}
-
-
-void Game::format(QGraphicsScene* newScene) {
-  newScene->setSceneRect(0, 0, WIDTH, HEIGHT);
-}
-
-void Game::levelChange() {
-  LevelChoose* levelPage = new LevelChoose;
-
-  QObject::connect(levelPage, SIGNAL(level1()), this, SLOT(createmap1()));
-  QObject::connect(levelPage, SIGNAL(level2()), this, SLOT(createmap2()));
-  QObject::connect(levelPage, SIGNAL(level3()), this, SLOT(createmap3()));
-  QObject::connect(levelPage, SIGNAL(level4()), this, SLOT(createmap4()));
-
-
-  format(levelPage);
-  setWindowTitle("Levels");
-  setScene(levelPage);
-}
-
-void Game::createmap1()
+//
+Game::Game()
 {
-  preLevel = 1;
-  scene1 = new QGraphicsScene();
-  Map1 *map1 = new Map1(scene1);
-  setScene(scene1);
+	userfile = new Userfile(QString("Cys"),QString("1111"));
 
-  show();
+	scene[0] = new QGraphicsScene();
+	scene[0]->setSceneRect(0, 0, sceneWidth,sceneHeight);
+	scene[0]->setBackgroundBrush(QBrush(QImage("Resources/Floor.png")));
+
+	scene[1] = new QGraphicsScene();
+	scene[1]->setSceneRect(0, 0, sceneWidth, sceneHeight);
+
+	scene[0]->addItem(player);
+
+	box[0] = new Boxes();
+	scene[0]->addItem(box[0]);
+
+	box[1] = new Boxes();
+	scene[0]->addItem(box[1]);
+
+	block = new Block();
+	scene[0]->addItem(block);
+
+	spot = new Spot();
+	scene[0]->addItem(spot);
+
+	Spot * spot1 = new Spot();
+	scene[0]->addItem(spot1);
+
+	player->setFlag(QGraphicsItem::ItemIsFocusable);
+	player->setFocus();
+
+	step = new Step();
+	scene[0]->addItem(step);
+
+	view[0] = new QGraphicsView(scene[0]);
+	view[0]->setFixedSize(sceneWidth, sceneHeight);
+	view[0]->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	view[0]->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+	button[0] = new QPushButton("Up", view[0]);
+	button[1] = new QPushButton("Down", view[0]);
+	button[2] = new QPushButton("Left", view[0]);
+	button[3] = new QPushButton("Right", view[0]);
+
+	button[0]->setGeometry(800, 700, 100, 100);
+	button[1]->setGeometry(800, 900, 100, 100);
+	button[2]->setGeometry(700, 800, 100, 100);
+	button[3]->setGeometry(900, 800, 100, 100);
+
+	QGraphicsProxyWidget* proxy1 = scene[0]->addWidget(button[0]);
+	QGraphicsProxyWidget* proxy2 = scene[0]->addWidget(button[1]);
+	QGraphicsProxyWidget* proxy3 = scene[0]->addWidget(button[2]);
+	QGraphicsProxyWidget* proxy4 = scene[0]->addWidget(button[3]);
+
+	QObject::connect(button[0], SIGNAL(clicked()), this, SLOT(Player_Up()));
+	QObject::connect(button[1], SIGNAL(clicked()), this, SLOT(Player_Down()));
+	QObject::connect(button[2], SIGNAL(clicked()), this, SLOT(Player_Left()));
+	QObject::connect(button[3], SIGNAL(clicked()), this, SLOT(Player_Right()));
+
+	view[0]->show();
+
+	view[1] = new QGraphicsView(scene[1]);
+	view[1]->setFixedSize(sceneWidth, sceneHeight);
+
+	player->setPos(900, 100);
+	box[0]->setPos(500, 500);
+	block->setPos(200, 200);
+	spot->setPos(600, 600);
+	box[1]->setPos(700, 700);
+	spot1->setPos(500, 700);
+
 }
 
-void Game::createmap2()
+
+Game::~Game()
 {
-  preLevel = 2;
-  scene2 = new QGraphicsScene();
-  Map2 *map2 = new Map2(scene2);
-  setScene(scene2);
-
-  QTimer* timer = new QTimer();
-  QObject::connect(timer, SIGNAL(timeout()), this, SLOT(pass()));
-  timer->start(2000);
-
-  show();
 }
 
-void Game::createmap3() {
-  preLevel = 3;
-  scene3 = new QGraphicsScene();
-  Map3 *map3 = new Map3(scene3);
-  setScene(scene3);
-
-  show();
+void Game::Player_Up()
+{
+	player->setFlag(QGraphicsItem::ItemIsFocusable);
+	player->setFocus();
+	player->up();
+}
+void Game::Player_Down()
+{
+	player->setFlag(QGraphicsItem::ItemIsFocusable);
+	player->setFocus();
+	player->down();
 }
 
-void Game::createmap4() {
-  preLevel = 4;
-  scene4 = new QGraphicsScene();
-  Map4 *map4 = new Map4(scene4);
-  setScene(scene4);
-
-  show();
+void Game::Player_Right()
+{
+	player->setFlag(QGraphicsItem::ItemIsFocusable);
+	player->setFocus();
+	player->right();
 }
 
-void Game::next() {
-  switch (preLevel) {
-  case 1:
-    createmap2();
-    break;
-  case 2:
-    createmap3();
-    break;
-  case 3:
-    createmap4();
-    break;
-  }
+void Game::Player_Left()
+{
+	player->setFlag(QGraphicsItem::ItemIsFocusable);
+	player->setFocus();
+	player->left();
 }
 
-void Game::pass() {
-  LevelPass* passScene = new LevelPass;
-  format(passScene);
-  setScene(passScene);
-  QObject::connect(passScene, SIGNAL(levelPage()), this, SLOT(levelChange()));
-  QObject::connect(passScene, SIGNAL(exitSignal()), this, SLOT(close()));
-  QObject::connect(passScene, SIGNAL(nextSignal()), this, SLOT(next()));
-}
+/*void Game::keyPressEvent(QKeyEvent * event)
+{
+	{
+		if (event->key() == Qt::Key_Left)//当按下按键时
+		{
+			player->left();
+		}//其它几个按键同理
+		else if (event->key() == Qt::Key_Right)
+		{
+			player->right();
+		}
+		else if (event->key() == Qt::Key_Up)
+		{
+			player->up();
+		}
+		else if (event->key() == Qt::Key_Down)
+		{
+			player->down();
+		}
+	}
+}*/

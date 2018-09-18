@@ -1,19 +1,21 @@
-#pragma once
+#pragma once//
 #include<QGraphicsRectItem>
-#include <QKeyEvent>
-#include <QList>
-#include "Block.h"
-#include "Spot.h"
-#include "qsound.h"
-
-
-class Boxes :public QObject, public QGraphicsRectItem {
-  Q_OBJECT
+#include<QObject>
+#include<QBrush>
+#include<QPen>
+#include"spot.h"
+#include"MessageBox.h"
+#include"parameter.h"
+class Boxes :public QGraphicsRectItem, public QObject
+{
 public:
-  Boxes(QGraphicsItem * parent = 0);
-  void isArrival();
-  ~Boxes();
-  const bool getFlag();
+	Boxes();
+	bool getFlag();
+	void isArrival();//用来判断玩家是否在终点
+	static int count;
+	static int boxNum;;
+	~Boxes();
 private:
-  bool flag = 0;          //flag用来判断box是否到达spot
+	int flag1 = 0;
+	int flag2 = 0;
 };
