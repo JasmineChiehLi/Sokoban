@@ -2,21 +2,26 @@
 #include"Top.h"
 extern Top*top;
 Start::Start() {
+
+  //初始化三个按鈕
   QPushButton *log = new QPushButton;
   QPushButton *sign = new QPushButton;
   QPushButton *exit = new QPushButton;
 
+  //初始化四个用以布局的QWidget
   QWidget *options = new QWidget;
   QWidget *logLine = new QWidget;
   QWidget *exitLine = new QWidget;
   QWidget *signLine = new QWidget;
-  //
+  
+  //初始化五个Layout用以布局，对应以上的Widget以及最底层的父Widget
   QHBoxLayout *startLay = new QHBoxLayout;
   QVBoxLayout *optLay = new QVBoxLayout;
   QHBoxLayout *logLay = new QHBoxLayout;
   QHBoxLayout *exitLay = new QHBoxLayout;
   QHBoxLayout *signLay = new QHBoxLayout;
 
+  //以下通过设置layout和widget大小及对齐方式布局按钮以和背景图上的人物图完成预设效果
   options->setFixedSize(QSize(buttonW1 * factorW, buttonH1 * 5.26));
   logLine->setFixedSize(QSize(buttonW1 * factorW, buttonH1*factorH));
   exitLine->setFixedSize(QSize(buttonW1 * factorW, buttonH1*factorH));
@@ -31,28 +36,35 @@ Start::Start() {
   exitLine->setContentsMargins(0, 0, startMargin, 0);
   signLine->setContentsMargins(0, 0, startMargin, 0);
 
-  logLay->addWidget(log);
-  exitLay->addWidget(exit);
-  signLay->addWidget(sign);
-
   optLay->setAlignment(Qt::AlignBottom);
   logLay->setAlignment(Qt::AlignRight | Qt::AlignBottom);
   exitLay->setAlignment(Qt::AlignCenter | Qt::AlignBottom);
   signLay->setAlignment(Qt::AlignRight | Qt::AlignBottom);
+  //设置布局完成
 
+  //将按钮部件加到layout中
+  logLay->addWidget(log);
+  exitLay->addWidget(exit);
+  signLay->addWidget(sign);
+
+  //将三个Widget放入父layout
   optLay->addWidget(logLine);
   optLay->addWidget(exitLine);
   optLay->addWidget(signLine);
 
+  //设置父layout为父widget布局
   startLay->addWidget(options);
 
+  //为三个按钮添加slot事件
   QObject::connect(log, SIGNAL(clicked()), this, SLOT(logIn()));
   QObject::connect(sign, SIGNAL(clicked()), this, SLOT(signUp()));
   QObject::connect(exit, SIGNAL(clicked()), this, SLOT(close()));
 
+  //设置各种部件大小尺寸
   setFixedHeight(WIN_HEIGHT);
   setFixedWidth(WIN_WIDHT);
 
+  
   log->setFixedHeight(buttonH1);
   log->setFixedWidth(buttonW1);
   sign->setFixedHeight(buttonH1);
@@ -60,6 +72,7 @@ Start::Start() {
   exit->setFixedHeight(buttonH1);
   exit->setFixedWidth(buttonW1);
 
+  //设置按钮图，达到预期效果
   log->setStyleSheet("QPushButton{border-image:url(Resources/LogNormal.png);background:transparent;}"
     "QPushButton:hover{border-image:url(Resources/LogHover.png);background:transparent;}"
     "QPushButton:pressed{border-image:url(Resources/LogPressed.png);background:transparent;");
@@ -74,7 +87,7 @@ Start::Start() {
 
   setLayout(startLay);
 
-
+  //设置背景图
   setAutoFillBackground(true);
   QPalette* backGround = new QPalette;
   backGround->setBrush(QPalette::Background, QBrush(QPixmap("Resources\\StartWall.jpg")));
@@ -85,6 +98,7 @@ Start::~Start() {
 
 }
 
+//登陆界面
 void Start::logIn() {
   logUser = new Users(LogIn);
   logUser->show();
@@ -93,6 +107,7 @@ void Start::logIn() {
   this->hide();
 }
 
+//注册界面
 void Start::signUp() {
   signUser = new Users(SignUp);
   QObject::connect(signUser, SIGNAL(closeSignal()), this, SLOT(play()));
@@ -101,8 +116,7 @@ void Start::signUp() {
   this->hide();
 }
 
+//开始游戏，转到游戏
 void Start::play() {
- // Game* game = new Game;
- // game->show();
 	top = new Top();
 }
