@@ -8,10 +8,10 @@
 #include<QList>
 #include<QMainWindow>
 
-#include"block.h"
-#include"boxes.h"
-#include"spot.h"
-#include"parameter.h"
+#include"Block.h"
+#include"Boxes.h"
+#include"Spot.h"
+#include"Parameter.h"
 class Player 
   :public QObject, public QGraphicsRectItem
 {

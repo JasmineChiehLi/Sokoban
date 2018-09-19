@@ -1,7 +1,9 @@
 #include "Player.h"
 #include"Step.h"
-#include"Top.h"//
+#include"Top.h"
+#include "Block.h"
 #include"qsound.h"
+
 extern Top * top;
 Player::Player()
 {

@@ -1,7 +1,6 @@
 #include "Map4.h"
 #define unit 75
-extern int boxesNumber;
-//
+
 Map4::Map4()
 {
 
@@ -123,17 +122,8 @@ Map4::Map4(QGraphicsScene *scene)
 		scene->addItem(spot[i]);
 
 	}
-  QFont mouse;
-  mouse.setFamily("Impact");
-  mouse.setPointSize(20);
 
-  button[0]->setFont(mouse);
-  button[1]->setFont(mouse);
-  button[2]->setFont(mouse);
-  button[3]->setFont(mouse);
-  button[4]->setFont(mouse);
-
-	button[0] = new QPushButton("Up");
+  button[0] = new QPushButton("Up");
 	button[1] = new QPushButton("Down");
 	button[2] = new QPushButton("Left");
 	button[3] = new QPushButton("Right");
@@ -166,7 +156,7 @@ Map4::Map4(QGraphicsScene *scene)
 	step = new Step();
 	scene->addItem(step);
 
-	Boxes::boxNum = 6;
+	Boxes::boxNum = 1;
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();

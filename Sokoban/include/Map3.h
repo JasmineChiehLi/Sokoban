@@ -15,7 +15,8 @@
 #include"Spot.h"
 #include"Step.h"
 #include"Userfile.h"
-#include"parameter.h"
+#include"Parameter.h"
+
 class Map3 
   :public QObject
 {

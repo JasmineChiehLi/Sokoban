@@ -78,15 +78,15 @@ Start::Start() {
   //设置按钮图，达到预期效果
   log->setStyleSheet("QPushButton{border-image:url(Resources/LogNormal.png);background:transparent;}"
     "QPushButton:hover{border-image:url(Resources/LogHover.png);background:transparent;}"
-    "QPushButton:pressed{border-image:url(Resources/LogPressed.png);background:transparent;");
+    "QPushButton:pressed{border-image:url(Resources/LogPressed.png);background:transparent;}");
 
   sign->setStyleSheet("QPushButton{border-image:url(Resources/SignNormal.png);background:transparent;}"
     "QPushButton:hover{border-image:url(Resources/SignHover.png);background:transparent;}"
-    "QPushButton:pressed{border-image:url(Resources/SignPressed.png);background:transparent;");
+    "QPushButton:pressed{border-image:url(Resources/SignPressed.png);background:transparent;}");
 
   exit->setStyleSheet("QPushButton{border-image:url(Resources/ExitNormal.png);background:transparent;}"
     "QPushButton:hover{border-image:url(Resources/ExitHover.png);background:transparent;}"
-    "QPushButton:pressed{border-image:url(Resources/ExitPressed.png);background:transparent;");
+    "QPushButton:pressed{border-image:url(Resources/ExitPressed.png);background:transparent;}");
 
   setLayout(startLay);
 

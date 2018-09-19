@@ -154,7 +154,7 @@ Map2::Map2(QGraphicsScene *scene) {
 	step = new Step();
 	scene_->addItem(step);
 
-	Boxes::boxNum = 3;
+	Boxes::boxNum = 1;
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();

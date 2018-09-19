@@ -1,13 +1,13 @@
-#pragma 
+#pragma once
 #include<QPen>
 #include<QObject>
 #include<QBrush>
 #include<QGraphicsRectItem>
 
-#include"parameter.h"
+#include"Parameter.h"
 
 class Block 
-  :public QGraphicsRectItem, public QObject
+  :public QObject, public QGraphicsRectItem
 {
 public:
 	Block();

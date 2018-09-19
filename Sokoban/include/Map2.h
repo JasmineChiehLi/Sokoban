@@ -10,13 +10,14 @@
 #include<qpushbutton.h>
 #include<QKeyEvent>
 
-#include"Player.h"
-#include"Boxes.h"
-#include"Block.h"
-#include"Spot.h"
-#include"Step.h"
-#include"Userfile.h"
-#include"parameter.h"
+#include "Player.h"
+#include "Boxes.h"
+#include "Block.h"
+#include "Spot.h"
+#include "Step.h"
+#include "Userfile.h"
+#include "Parameter.h"
+
 class Map2 
   :public QObject
 {

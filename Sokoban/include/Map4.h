@@ -23,10 +23,11 @@ class Map4
   Q_OBJECT
 public:
   Map4();
+  Map4(QGraphicsScene* scene);
   ~Map4();
+
   Step * step;
   Userfile * userfile;
-  Map4(QGraphicsScene* scene);
 
 private:
   Boxes*box[6];

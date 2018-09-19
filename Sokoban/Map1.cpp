@@ -160,7 +160,7 @@ Map1::Map1(QGraphicsScene *scene) { //这里是一个指针，传进来的是scene1
 	step = new Step();
 	scene->addItem(step);//步数要放在最后创建
 
-	Boxes::boxNum = 3;//决定推几个箱子到位就算赢
+	Boxes::boxNum = 1;//决定推几个箱子到位就算赢
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();

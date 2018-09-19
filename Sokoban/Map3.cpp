@@ -1,6 +1,6 @@
 #include "Map3.h"
 #define unit 75
-//
+
 Map3::Map3() {
 
 }
@@ -145,7 +145,7 @@ Map3::Map3(QGraphicsScene *scene) {
 	step = new Step();
 	scene->addItem(step);//步数要放在最后创建
 
-	Boxes::boxNum = 4;
+	Boxes::boxNum = 1;
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
