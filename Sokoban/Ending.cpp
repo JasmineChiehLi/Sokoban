@@ -1,7 +1,6 @@
 #include "Ending.h"
 #include"Top.h"
 #include"qwidget.h"
-
 extern Top*top;
 Ending::Ending()
 {
@@ -59,12 +58,12 @@ void Ending::create()
   QObject::connect(btn_exit, SIGNAL(clicked()), finalView, SLOT(close()));
   QObject::connect(btn_level, SIGNAL(clicked()), this, SLOT(levelchoose()));
 }
-//
+
 
 void Ending::levelchoose()
 {
-
-  top->c = new LevelChoose(this, 3);
+  QGraphicsScene* scene = new QGraphicsScene();
+  top->c = new LevelChoose(scene, 3);
   top->c->show();
 
   finalView->close();
