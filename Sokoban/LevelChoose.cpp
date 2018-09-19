@@ -1,13 +1,17 @@
 #include "LevelChoose.h"
-//#include "qsound.h"/
 #include"Top.h"
 extern Top * top;
+
+LevelChoose::LevelChoose() {
+
+}
+
 LevelChoose::LevelChoose(QGraphicsScene* scene,int level) {
 	//initialize the scene
 	scene_ = scene;
 	level_ = level;
 	scene->setSceneRect(0, 0, 1000, 1000);
-	setBackgroundBrush(QBrush(QImage("Resources/Floor.png")));
+	setBackgroundBrush(QBrush(QImage(":/Player_1/Resources/Floor.png")));
 
 	//去掉滚动栏
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -98,20 +102,21 @@ LevelChoose::~LevelChoose()
 	delete scene_;
 
 }
+
 //创建游戏
 void LevelChoose::createmap1()
 {
 	top->scene1 = new QGraphicsScene();
 	top->map1 = new Map1(top->scene1);//进入map1
 	top->view1 = new QGraphicsView(top->scene1);
-	top->view1->show();//地图的显示
-	delete this;
+	top->view1->show(); //地图的显示
+	delete this; //关掉选关界面
 }
 
 void LevelChoose::createmap2()
 {
 	top->scene2 = new QGraphicsScene();
-	top->map2 = new Map2(top->scene2);
+	top->map2 = new Map2(top->scene2); //进入map2
 	top->view2 = new QGraphicsView(top->scene2);
 	top->view2->show();
 	delete this;
@@ -120,17 +125,17 @@ void LevelChoose::createmap2()
 void LevelChoose::createmap3()
 {
 	top->scene3 = new QGraphicsScene();
-	top->map3 = new Map3(top->scene3);//进入map1
+	top->map3 = new Map3(top->scene3); //进入map3
 	top->view3 = new QGraphicsView(top->scene3);
-	top->view3->show();//地图的显示
+	top->view3->show(); //地图的显示
 	delete this;
 }
 
 void LevelChoose::createmap4()
 {
 	top->scene4 = new QGraphicsScene();
-	top->map4 = new Map4(top->scene4);//进入map1
+	top->map4 = new Map4(top->scene4); //进入map4
 	top->view4 = new QGraphicsView(top->scene4);
-	top->view4->show();//地图的显示
+	top->view4->show(); //地图的显示
 	delete this;
 }

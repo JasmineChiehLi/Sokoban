@@ -1,61 +1,58 @@
 #pragma once
-#include <QLineEdit>
+#include <QFile>
 #include <QLabel>
 #include <QString>
 #include <String>
 #include <QWidget>
+#include <QPalette>
+#include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QPalette>
-//
-#include <QFile>
 #include <QTextStream>
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
 #include "Userfile.h"
+#include "Parameter.h"
 
-#define WIN_HEIGHT 675
-#define WIN_WIDHT 975
-#define SignUp true
-#define LogIn false
 
 class Users
-  :public QWidget
+	:public QWidget
 {
-  Q_OBJECT
+	Q_OBJECT
 public:
-  Users();
-  ~Users();
-  Users(bool isNew);
-  bool getHasExisted();
-  void generalUI();
-  bool canPass();
+	Users();
+	~Users();
+	Users(bool isNew);
   void closeUI();
+	void generalUI();
+	bool canPass();
+  bool getHasExisted();
 
-  public slots:
-  void signup();
-  void login();
-  void backStart();
+public slots:
+	void signup();
+	void login();
+	void backStart();
 
 signals:
-  void sendsignal();
+	void sendsignal();
 signals:
-  void closeSignal();
+	void closeSignal();
 
 private:
-  bool status_;
-  QString name;
-  QString password;
+	bool status_;
+	QString name;
+	QString password;
   QFile *list = nullptr;
-  Userfile *userfile = nullptr;
-  QLineEdit *userName = nullptr;
-  QLineEdit *userPasswd = nullptr;
-  QTextStream *listEdit = nullptr;
-  QTextStream *output = nullptr;
-  QTextStream *input = nullptr;
   QPalette *headPic = nullptr;
+  QTextStream *input = nullptr;
+	QLineEdit *userName = nullptr;
+  QTextStream *output = nullptr;
+	QLineEdit *userPasswd = nullptr;
+	QTextStream *listEdit = nullptr;
+
 };
+

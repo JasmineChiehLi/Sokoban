@@ -5,23 +5,22 @@
 #include <QFont>
 
 #include "Users.h"
-#include "Game.h"
-//
 
 class Start
-  :public QWidget
+	:public QWidget
 {
-  Q_OBJECT
+	Q_OBJECT
 public:
-  Start();
-  ~Start();
+	Start();
+	~Start();
 
-  public slots:
-  void logIn();
-  void signUp();
-  void play();
+public slots:
+	void logIn();
+	void signUp();
+	void play();
 
 private:
-  Users * logUser = nullptr;
-  Users *signUser = nullptr;
+	Users * logUser = nullptr;
+	Users *signUser = nullptr;
 };
+

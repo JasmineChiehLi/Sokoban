@@ -1,5 +1,5 @@
 #pragma once
-//#include "Player_1.h"
+#include "Player.h"
 #include <QtWidgets/QApplication>
 #include<QGraphicsScene>
 #include<QGraphicsItem>
@@ -21,8 +21,7 @@
 #include"Userfile.h"
 #include"parameter.h"
 #include"LevelChoose.h"
-#include"ending.h"
-#include"Start.h"
+#include"Ending.h"
 class Top
 {
 public:
@@ -31,29 +30,27 @@ public:
 	QGraphicsScene * ch;
 	LevelChoose * c;
 
-	//Start *start;
-	Userfile * userfile;
-
 	QGraphicsScene * newScene;
 	LevelChoose * newChoose;
 
 	MessageBox * messagebox;
-	//
-	Ending *ending = new Ending();
-	QGraphicsScene * scene1;
+
+	QGraphicsScene * scene1;//地图1
 	QGraphicsView * view1=nullptr;
 	Map1 * map1;
 
-	QGraphicsScene * scene2;
+	QGraphicsScene * scene2;//地图2
 	QGraphicsView * view2=nullptr;
 	Map2 * map2;
 
-	QGraphicsScene * scene3;
+	QGraphicsScene * scene3;//地图3
 	QGraphicsView * view3 = nullptr;
 	Map3 * map3;
 
-	QGraphicsScene * scene4;
+	QGraphicsScene * scene4;//地图4
 	QGraphicsView * view4 = nullptr;
 	Map4 * map4;
+
+	Ending * ending = new Ending();//结束界面
 };
 

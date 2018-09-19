@@ -9,7 +9,7 @@
 #include<QBrush>
 #include<qpushbutton.h>
 #include<QKeyEvent>
-//
+
 #include"Player.h"
 #include"Boxes.h"
 #include"Block.h"
@@ -17,7 +17,8 @@
 #include"Step.h"
 #include"Userfile.h"
 #include"parameter.h"
-class Map2:public QObject
+class Map2 
+  :public QObject
 {
 	Q_OBJECT
 public:
@@ -25,17 +26,27 @@ public:
 	Map2();
 	~Map2();
 	Step * step;
+
 private:
-	QGraphicsScene * scene_;
-	Block * block[57];
 	Boxes* box[3];
-	Player *player;
 	Spot* spot[3];
+  int flag = 1;        //用来改变数组坐标的flag
+  Player *player;
+  qreal sit[10000];   //last_step，存储坐标的数组
+  Block * block[57];
+  QGraphicsScene * scene_;
 	QPushButton * button[buttonNum];
+
+
 public slots:
 	void Player_Up();
 	void Player_Down();
 	void Player_Right();
 	void Player_Left();
 	void Player_Restart();
+
+	void pen();   //last_step
+	void receivePos();
+
+
 };

@@ -9,8 +9,8 @@ public:
 	int getStep();
 	void setStep(int newStep);
 	~Step();
+
 private:
 	int step;
 };
 
-//

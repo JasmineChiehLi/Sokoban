@@ -1,13 +1,14 @@
 #include "Step.h"
 #include<QFont>
-//
+
 
 Step::Step(QGraphicsTextItem * parent): QGraphicsTextItem(parent)
 {
 	step = 0;
 	setPlainText(QString("Step: ") + QString::number(step));
-	setDefaultTextColor(Qt::blue);
-	setFont(QFont("times", 30));//设置显示样式
+	setDefaultTextColor(Qt::white);
+	setFont(QFont("Impact", 25));//设置显示样式
+  setPos(700, 15);
 }
 
 void Step::increase()

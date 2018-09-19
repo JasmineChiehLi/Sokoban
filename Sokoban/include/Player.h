@@ -6,27 +6,27 @@
 #include<QBrush>
 #include<QPen>
 #include<QList>
-//#include<Boxes.h>
 #include<QMainWindow>
-//
+
 #include"block.h"
 #include"boxes.h"
 #include"spot.h"
 #include"parameter.h"
-class Player:public QObject,public QGraphicsRectItem
+class Player 
+  :public QObject, public QGraphicsRectItem
 {
+  Q_OBJECT
 public:
-	Player();
-	void keyPressEvent(QKeyEvent * event);
-	void arrival(Boxes * box);
-	void up();
-	void down();
-	void left();
-	void right();
-	/*void left_pull();
-	void right_pull();
-	void up_pull();
-	void down_pull();*/
-	~Player();
-};
+  Player();
+  ~Player();
+  void up();
+  void down();
+  void left();
+  void right();
+  void arrival(Boxes * box);
+  void keyPressEvent(QKeyEvent * event);
 
+signals:
+  void countbox();
+
+};

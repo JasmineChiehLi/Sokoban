@@ -1,11 +1,8 @@
 #include "Ending.h"
-#include"Top.h"
-#include"qwidget.h"
-extern Top*top;
 Ending::Ending()
 {
-
 }
+
 Ending::~Ending()
 {
 	delete btn_exit;
@@ -26,7 +23,7 @@ void Ending::create()
 	btn_level->setGeometry(450, 370, 186, 74);
 	btn_level->setText("level");
 	btn_level->setFont(QFont("impact", 14));
-	btn_level->setStyleSheet("QPushButton{border-image:url(Resources/ButtonNormalE.png);background:transparent;}""QPushButton:hover{border-image:url(Resources/ButtonHoverE.png);background:transparent;}""QPushButton:pressed{border-image:url(Resources/ButtonPressedE.png);background:transparent;}");
+	btn_level->setStyleSheet("QPushButton{border-image:url(Resources/ButtonNormal.png);background:transparent;}""QPushButton:hover{border-image:url(Resources/ButtonHover.png);background:transparent;}""QPushButton:pressed{border-image:url(Resources/ButtonPressed.png);background:transparent;}");
 	addWidget(btn_level);
 
 	label_l = new QLabel();
@@ -39,7 +36,7 @@ void Ending::create()
 	btn_exit->setGeometry(320, 470, 186, 74);
 	btn_exit->setText("exit");
 	btn_exit->setFont(QFont("impact", 14));
-	btn_exit->setStyleSheet("QPushButton{border-image:url(Resources/ButtonNormalLE.png);background:transparent;}""QPushButton:hover{border-image:url(Resources/ButtonHoverLE.png);background:transparent;}""QPushButton:pressed{border-image:url(Resources/ButtonPressedLE.png);background:transparent;}");
+	btn_exit->setStyleSheet("QPushButton{border-image:url(Resources/ButtonNormalL.png);background:transparent;}""QPushButton:hover{border-image:url(Resources/ButtonHoverL.png);background:transparent;}""QPushButton:pressed{border-image:url(Resources/ButtonPressedL.png);background:transparent;}");
 	addWidget(btn_exit);
 	label_e = new QLabel();
 	label_e->setGeometry(340, 395, 75, 75);
@@ -53,22 +50,7 @@ void Ending::create()
 	label_c->setStyleSheet("QLabel{border-image:url(Resources/congrats.png);background:transparent;}");
 	addWidget(label_c);
 
-	finalView = new QGraphicsView(this);
+	QGraphicsView * finalView = new QGraphicsView(this);
 	finalView->show();
-	QObject::connect(btn_exit, SIGNAL(clicked()), finalView, SLOT(close()));
-	QObject::connect(btn_level, SIGNAL(clicked()),this, SLOT(levelchoose()));
+
 }
-//
-
-void Ending::levelchoose()
-{
-
-	top->c = new LevelChoose(this, 3);
-	top->c->show();
-
-	finalView->close();
-}
-/*void Ending::close()
-{
-	exit(0);
-}*/

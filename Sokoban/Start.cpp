@@ -1,6 +1,9 @@
 #include "Start.h"
 #include"Top.h"
+#include "Userfile.h"
+
 extern Top*top;
+extern Userfile* userfile;
 Start::Start() {
 
   //初始化三个按鈕
@@ -13,7 +16,7 @@ Start::Start() {
   QWidget *logLine = new QWidget;
   QWidget *exitLine = new QWidget;
   QWidget *signLine = new QWidget;
-  
+
   //初始化五个Layout用以布局，对应以上的Widget以及最底层的父Widget
   QHBoxLayout *startLay = new QHBoxLayout;
   QVBoxLayout *optLay = new QVBoxLayout;
@@ -32,7 +35,7 @@ Start::Start() {
   exitLine->setLayout(exitLay);
   signLine->setLayout(signLay);
 
-  logLine->setContentsMargins(0,0,startMargin,0);
+  logLine->setContentsMargins(0, 0, startMargin, 0);
   exitLine->setContentsMargins(0, 0, startMargin, 0);
   signLine->setContentsMargins(0, 0, startMargin, 0);
 
@@ -64,7 +67,7 @@ Start::Start() {
   setFixedHeight(WIN_HEIGHT);
   setFixedWidth(WIN_WIDHT);
 
-  
+
   log->setFixedHeight(buttonH1);
   log->setFixedWidth(buttonW1);
   sign->setFixedHeight(buttonH1);
@@ -118,5 +121,5 @@ void Start::signUp() {
 
 //开始游戏，转到游戏
 void Start::play() {
-	top = new Top();
+  top = new Top();
 }

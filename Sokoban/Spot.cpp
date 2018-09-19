@@ -11,4 +11,4 @@ Spot::Spot()
 
 Spot::~Spot()
 {
-}//
+}
