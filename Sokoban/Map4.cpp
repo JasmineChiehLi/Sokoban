@@ -1,12 +1,11 @@
 #include "Map4.h"
 #define unit 75
-
-Map4::Map4()
-{
+extern int boxesNumber;
+//
+Map4::Map4() {
 
 }
-Map4::Map4(QGraphicsScene *scene)
-{
+Map4::Map4(QGraphicsScene *scene) {
 
 	sit[0] = 150;
 	sit[1] = 450;   //1
@@ -123,23 +122,27 @@ Map4::Map4(QGraphicsScene *scene)
 
 	}
 
-  button[0] = new QPushButton("Up");
+	button[0] = new QPushButton("Up");
 	button[1] = new QPushButton("Down");
 	button[2] = new QPushButton("Left");
 	button[3] = new QPushButton("Right");
 	button[4] = new QPushButton("Restart");
 
-	button[0]->setGeometry(750, 525, 100, 75);
-	button[1]->setGeometry(750, 600, 100, 75);
-	button[2]->setGeometry(675, 600, 100, 75);
-	button[3]->setGeometry(825, 600, 100, 75);
-	button[4]->setGeometry(825, 525, 100, 75);
+	button[0]->setGeometry(765, 525, 90, 75);
+	button[1]->setGeometry(765, 600, 90, 75);
+	button[2]->setGeometry(675, 600, 90, 75);
+	button[3]->setGeometry(855, 600, 90, 75);
+	button[4]->setGeometry(720, 300, 186, 75);
 
-	button[0]->setStyleSheet("background:transparent;}");
-	button[1]->setStyleSheet("background:transparent;}");
-	button[2]->setStyleSheet("background:transparent;}");
-	button[3]->setStyleSheet("background:transparent;}");
-	button[4]->setStyleSheet("background:transparent;}");
+	for (int i = 0;i < 5;i++)
+	{
+		button[i]->setFont(QFont("impact", 12));
+	}
+	button[0]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[1]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[2]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[3]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[4]->setStyleSheet("QPushButton{border-image:url(Resources/restart.png);background:transparent;}");
 
 	QGraphicsProxyWidget* proxy1 = scene_->addWidget(button[0]);
 	QGraphicsProxyWidget* proxy2 = scene_->addWidget(button[1]);
@@ -154,9 +157,9 @@ Map4::Map4(QGraphicsScene *scene)
 	QObject::connect(button[4], SIGNAL(clicked()), this, SLOT(Player_Restart()));
 
 	step = new Step();
-	scene->addItem(step);
+	scene->addItem(step);//步数要放在最后创建
 
-	Boxes::boxNum = 1;
+	Boxes::boxNum = 6;//决定推几个箱子到位就算赢
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
@@ -165,50 +168,46 @@ Map4::Map4(QGraphicsScene *scene)
 
 
 	QPushButton* so = new QPushButton("lastStep");
-	so->setGeometry(675, 525, 75, 75);
+	so->setGeometry(720, 400, 186, 75);
 	QFont* font = new QFont();
-	font->setFamily("Impact");                                               //last_step的按钮
+	font->setFamily("Impact");  //last_step的按钮
 	font->setPointSize(20);
-	so->setStyleSheet("background:transparent;}");
+	so->setStyleSheet("QPushButton{border-image:url(Resources/restart.png);background:transparent;}");
+	so->setFont(QFont("impact", 12));
 	QObject::connect(so, SIGNAL(clicked()), this, SLOT(pen()));
-	scene->addWidget(so);
+	scene_->addWidget(so);
+
 
 }
 
 
-Map4::~Map4()
-{
+Map4::~Map4() {
 }
 
-void Map4::Player_Up()
-{
+void Map4::Player_Up() {
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
 	player->up();
 }
-void Map4::Player_Down()
-{
+void Map4::Player_Down() {
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
 	player->down();
 }
 
-void Map4::Player_Right()
-{
+void Map4::Player_Right() {
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
 	player->right();
 }
 
-void Map4::Player_Left()
-{
+void Map4::Player_Left() {
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
 	player->left();
 }
 
-void Map4::Player_Restart()
-{
+void Map4::Player_Restart() {
 	int boxesNumber = 6;
 	//row3
 	int row3 = unit * 3;
@@ -232,19 +231,17 @@ void Map4::Player_Restart()
 	for (int i = 0; i < boxesNumber; i++) {
 		QBrush brush_Box(QImage("Resources/box.png"));
 		box[i]->setBrush(brush_Box);
-    box[i]->reStart();
+		box[i]->reStart();
 	}
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
 
-	Boxes::count = 0;
 	step->setStep(0);
 }
 
 
-void Map4::pen()    //将原来的状态输出，达到last-step的作用
-{
+void Map4::pen() {  //将原来的状态输出，达到last-step的作用 
 	if (flag > 2)
 	{
 		player->setPos(sit[0 + (flag - 2) * 14], sit[1 + (flag - 2) * 14]);
@@ -262,8 +259,7 @@ void Map4::pen()    //将原来的状态输出，达到last-step的作用
 }
 
 
-void Map4::receivePos()   //存储信息的函数，将坐标存储进数组
-{
+void Map4::receivePos() {  //存储信息的函数，将坐标存储进数组 
 	sit[0 + flag * 14] = player->pos().x();
 	sit[1 + flag * 14] = player->pos().y();
 	sit[2 + flag * 14] = box[0]->pos().x();

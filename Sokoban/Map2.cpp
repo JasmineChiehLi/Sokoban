@@ -1,8 +1,7 @@
 #include "Map2.h"
 #define unit 75
 
-Map2::Map2()
-{
+Map2::Map2() {
 
 }
 
@@ -24,11 +23,13 @@ Map2::Map2(QGraphicsScene *scene) {
 	//create the map
 
 	//block*55,player*1,,box*3
-	for (int i = 0; i < 57; i++) {
+	for (int i = 0; i < 57; i++)
+	{
 		block[i] = new Block();
 	}
 	player = new Player();
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++)
+	{
 		box[i] = new Boxes();
 		spot[i] = new Spot();
 	}
@@ -36,13 +37,15 @@ Map2::Map2(QGraphicsScene *scene) {
 	int boxesNumber = 3;
 
 	//row0
-	for (int i = 0; i < 9; i++)	{
+	for (int i = 0; i < 9; i++)
+	{
 		block[i]->setPos(unit*i, 0);
 	}
 
 	//row1
 	int row1 = unit;
-	for (int i = 9; i < 15; i++) {
+	for (int i = 9; i < 15; i++)
+	{
 		block[i]->setPos(unit*(i - 9), row1);
 	}
 	block[15]->setPos(unit * 8, row1);
@@ -51,18 +54,20 @@ Map2::Map2(QGraphicsScene *scene) {
 
 	//row2
 	int row2 = unit * 2;
-	for (int i = 16; i < 19; i++) {
+	for (int i = 16; i < 19; i++)
+	{
 		block[i]->setPos(unit*(i - 16), row2);
 	}
-	
-	for (int i = 19; i < 23; i++) {
+	for (int i = 19; i < 23; i++)
+	{
 		block[i]->setPos(unit*(i - 14), row2);
 	}
 	player->setPos(unit * 3, row2);
 
 	//row3
 	int row3 = unit * 3;
-	for (int i = 23; i < 26; i++) {
+	for (int i = 23; i < 26; i++)
+	{
 		block[i]->setPos(unit*(i - 23), row3);
 	}
 	box[0]->setPos(unit * 4, row3);
@@ -71,7 +76,8 @@ Map2::Map2(QGraphicsScene *scene) {
 
 	//row4
 	int row4 = unit * 4;
-	for (int i = 28; i < 32; i++) {
+	for (int i = 28; i < 32; i++)
+	{
 		block[i]->setPos(unit*(i - 28), row4);
 	}
 	block[32]->setPos(unit * 5, row4);
@@ -105,17 +111,19 @@ Map2::Map2(QGraphicsScene *scene) {
 
 	//row8
 	int row8 = unit * 8;
-	for (int i = 46; i < 55; i++) {
+	for (int i = 46; i < 55; i++)
+	{
 		block[i]->setPos(unit*(i - 46), row8);
 	}
 
 	//add items to the scene
 	scene->addItem(player);
-	for (int i = 0; i < 57; i++) {
+	for (int i = 0; i < 57; i++)
+	{
 		scene->addItem(block[i]);
 	}
-	
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++)
+	{
 		scene->addItem(box[i]);
 		scene->addItem(spot[i]);
 
@@ -127,17 +135,21 @@ Map2::Map2(QGraphicsScene *scene) {
 	button[3] = new QPushButton("Right");
 	button[4] = new QPushButton("Restart");
 
-	button[0]->setGeometry(750, 525, 75, 75);
-	button[1]->setGeometry(750, 600, 75, 75);
-	button[2]->setGeometry(675, 600, 75, 75);
-	button[3]->setGeometry(825, 600, 75, 75);
-	button[4]->setGeometry(825, 525, 75, 75);
+	button[0]->setGeometry(765, 525, 90, 75);
+	button[1]->setGeometry(765, 600, 90, 75);
+	button[2]->setGeometry(675, 600, 90, 75);
+	button[3]->setGeometry(855, 600, 90, 75);
+	button[4]->setGeometry(720, 300, 186, 75);
 
-	button[0]->setStyleSheet("background:transparent;}");
-	button[1]->setStyleSheet("background:transparent;}");
-	button[2]->setStyleSheet("background:transparent;}");
-	button[3]->setStyleSheet("background:transparent;}");
-	button[4]->setStyleSheet("background:transparent;}");
+	for (int i = 0;i < 5;i++)
+	{
+		button[i]->setFont(QFont("impact", 12));
+	}
+	button[0]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[1]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[2]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[3]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[4]->setStyleSheet("QPushButton{border-image:url(Resources/restart.png);background:transparent;}");
 
 	QGraphicsProxyWidget* proxy1 = scene_->addWidget(button[0]);
 	QGraphicsProxyWidget* proxy2 = scene_->addWidget(button[1]);
@@ -152,9 +164,9 @@ Map2::Map2(QGraphicsScene *scene) {
 	QObject::connect(button[4], SIGNAL(clicked()), this, SLOT(Player_Restart()));
 
 	step = new Step();
-	scene_->addItem(step);
+	scene->addItem(step);//步数要放在最后创建
 
-	Boxes::boxNum = 1;
+	Boxes::boxNum = 3;//决定推几个箱子到位就算赢
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
@@ -163,14 +175,14 @@ Map2::Map2(QGraphicsScene *scene) {
 
 
 	QPushButton* so = new QPushButton("lastStep");
-	so->setGeometry(675, 525, 75, 75);
+	so->setGeometry(720, 400, 186, 75);
 	QFont* font = new QFont();
-	font->setFamily("Impact");                                               //last_step的按钮
+	font->setFamily("Impact");  //last_step的按钮
 	font->setPointSize(20);
-	so->setStyleSheet("background:transparent;}");
+	so->setStyleSheet("QPushButton{border-image:url(Resources/restart.png);background:transparent;}");
+	so->setFont(QFont("impact", 12));
 	QObject::connect(so, SIGNAL(clicked()), this, SLOT(pen()));
-	scene->addWidget(so);
-
+	scene_->addWidget(so);
 }
 
 
@@ -182,6 +194,7 @@ void Map2::Player_Up() {
 	player->setFocus();
 	player->up();
 }
+
 void Map2::Player_Down() {
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
@@ -201,8 +214,9 @@ void Map2::Player_Left() {
 }
 
 
-void Map2::pen() {  //将原来的状态输出，达到last-step的作用 
-	if (flag > 2) {
+void Map2::pen() {   //将原来的状态输出，达到last-step的作用
+	if (flag > 2)
+	{
 		player->setPos(sit[0 + (flag - 2) * 8], sit[1 + (flag - 2) * 8]);
 		box[0]->setPos(sit[2 + (flag - 3) * 8], sit[3 + (flag - 3) * 8]);
 		box[1]->setPos(sit[4 + (flag - 3) * 8], sit[5 + (flag - 3) * 8]);
@@ -250,12 +264,11 @@ void Map2::Player_Restart() {
 	for (int i = 0; i < boxesNumber; i++) {
 		QBrush brush_Box(QImage("Resources/box.png"));
 		box[i]->setBrush(brush_Box);
-    box[i]->reStart();
+		box[i]->reStart();
 	}
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
 
-	Boxes::count = 0;
 	step->setStep(0);
 }

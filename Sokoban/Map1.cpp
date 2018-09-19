@@ -9,7 +9,7 @@ Map1::Map1() {
 
 }
 
-Map1::Map1(QGraphicsScene *scene) { //这里是一个指针，传进来的是scene1 
+Map1::Map1(QGraphicsScene *scene) { //这里是一个指针，传进来的是scene1
 
 	sit[0] = 75;
 	sit[1] = 75;   //1
@@ -111,17 +111,20 @@ Map1::Map1(QGraphicsScene *scene) { //这里是一个指针，传进来的是scene1
 	block[44]->setPos(unit * 8, row7);
 
 	//row8
-	for (int i = 45; i < 54; i++) {
+	for (int i = 45; i < 54; i++)
+	{
 		block[i]->setPos(unit*(i - 45), unit * 8);
 	}
 
 
 	//add items to the scene
 	scene->addItem(player);
-	for (int i = 0; i < 54; i++) {
+	for (int i = 0; i < 54; i++)
+	{
 		scene->addItem(block[i]);
 	}
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++)
+	{
 		scene->addItem(box[i]);
 		scene->addItem(spot[i]);
 
@@ -133,17 +136,21 @@ Map1::Map1(QGraphicsScene *scene) { //这里是一个指针，传进来的是scene1
 	button[3] = new QPushButton("Right");
 	button[4] = new QPushButton("Restart");
 
-	button[0]->setGeometry(750, 525, 75, 75);
-	button[1]->setGeometry(750, 600, 75, 75);
-	button[2]->setGeometry(675, 600, 75, 75);
-	button[3]->setGeometry(825, 600, 75, 75);
-	button[4]->setGeometry(825, 525, 75, 75);
+	button[0]->setGeometry(765, 525, 90, 75);
+	button[1]->setGeometry(765, 600, 90, 75);
+	button[2]->setGeometry(675, 600, 90, 75);
+	button[3]->setGeometry(855, 600, 90, 75);
+	button[4]->setGeometry(720, 300, 186, 75);
 
-	button[0]->setStyleSheet("background:transparent;}");
-	button[1]->setStyleSheet("background:transparent;}");
-	button[2]->setStyleSheet("background:transparent;}");
-	button[3]->setStyleSheet("background:transparent;}");
-	button[4]->setStyleSheet("background:transparent;}");
+	for (int i = 0;i < 5;i++)
+	{
+		button[i]->setFont(QFont("impact", 12));
+	}
+	button[0]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[1]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[2]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[3]->setStyleSheet("QPushButton{border-image:url(Resources/keyboard.png);background:transparent;}");
+	button[4]->setStyleSheet("QPushButton{border-image:url(Resources/restart.png);background:transparent;}");
 
 	QGraphicsProxyWidget* proxy1 = scene_->addWidget(button[0]);
 	QGraphicsProxyWidget* proxy2 = scene_->addWidget(button[1]);
@@ -160,7 +167,7 @@ Map1::Map1(QGraphicsScene *scene) { //这里是一个指针，传进来的是scene1
 	step = new Step();
 	scene->addItem(step);//步数要放在最后创建
 
-	Boxes::boxNum = 1;//决定推几个箱子到位就算赢
+	Boxes::boxNum = 3;//决定推几个箱子到位就算赢
 
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
@@ -169,11 +176,12 @@ Map1::Map1(QGraphicsScene *scene) { //这里是一个指针，传进来的是scene1
 
 
 	QPushButton* so = new QPushButton("lastStep");
-	so->setGeometry(675, 525, 75, 75);
+	so->setGeometry(720, 400, 186, 75);
 	QFont* font = new QFont();
-	font->setFamily("Impact");                                               //last_step的按钮
+	font->setFamily("Impact");  //last_step的按钮
 	font->setPointSize(20);
-	so->setStyleSheet("background:transparent;}");
+	so->setStyleSheet("QPushButton{border-image:url(Resources/restart.png);background:transparent;}");
+	so->setFont(QFont("impact", 12));
 	QObject::connect(so, SIGNAL(clicked()), this, SLOT(pen()));
 	scene_->addWidget(so);
 
@@ -182,8 +190,6 @@ Map1::Map1(QGraphicsScene *scene) { //这里是一个指针，传进来的是scene1
 
 Map1::~Map1() {
 }
-
-
 //以下是鼠标控制槽函数
 void Map1::Player_Up() {
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -228,17 +234,16 @@ void Map1::Player_Restart() {
 	for (int i = 0; i < boxesNumber; i++) {
 		QBrush brush_Box(QImage("Resources/box.png"));
 		box[i]->setBrush(brush_Box);
-    box[i]->reStart();
+		box[i]->reStart();
 	}
 	player->setFlag(QGraphicsItem::ItemIsFocusable);
 	player->setFocus();
 
-	Boxes::count = 0;
 	step->setStep(0);
 }
 
 
-void Map1::pen() { //将原来的状态输出，达到last-step的作用
+void Map1::pen() {   //将原来的状态输出，达到last-step的作用
 	if (flag > 2)
 	{
 		player->setPos(sit[0 + (flag - 2) * 8], sit[1 + (flag - 2) * 8]);
@@ -252,7 +257,7 @@ void Map1::pen() { //将原来的状态输出，达到last-step的作用
 }
 
 
-void Map1::receivePos() { //存储信息的函数，将坐标存储进数组
+void Map1::receivePos()  { //存储信息的函数，将坐标存储进数组 
 	sit[0 + flag * 8] = player->pos().x();
 	sit[1 + flag * 8] = player->pos().y();
 	sit[2 + flag * 8] = box[0]->pos().x();
